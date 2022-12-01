@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//gerador de diagramas
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+//tabela boloes 
+
+//representa um estrutura, não necessariamente pode ser uma tabela,
+
+model Pool {
+  //gera o id automaticamente com o cuid, sendo mais seguro
+  id    String @id @default(cuid())
+  title String
+  code  String @unique
+  createdAt DateTime @default(now())
+
+}
