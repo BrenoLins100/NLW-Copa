@@ -49,6 +49,7 @@ model User {
   id        String   @id @default(cuid())
   name      String
   email     String   @unique
+  googleId  String?  @unique
   avatarUrl String? //String? pode ser vazio
   createdAt DateTime @default(now())
 
@@ -77,4 +78,6 @@ model Guess {
 
   participant Participant @relation(fields: [participantId], references: [id])
   game        Game        @relation(fields: [gameId], references: [id])
+
+  @@unique([participantId, gameId])
 }
