@@ -1,12 +1,12 @@
 import { Heading, HStack, Text, VStack } from "native-base";
 
-import { PoolProps } from "./PoolCard";
+import { PoolCardProps } from "./PoolCard";
 import { Participants } from "./Participants";
 
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+
 
 interface Props {
-  data: PoolProps;
+  data: PoolCardProps;
 }
 
 export function PoolHeader({ data }: Props) {

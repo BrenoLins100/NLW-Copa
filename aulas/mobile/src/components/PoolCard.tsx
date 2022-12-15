@@ -3,7 +3,7 @@ import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 import { Participants, ParticipantProps } from "./Participants";
 
-export interface PoolProps { 
+export interface PoolCardProps { 
   id: string;
   code: string;
   title: string;
@@ -19,7 +19,7 @@ export interface PoolProps {
 }
 
 interface Props extends TouchableOpacityProps {
-  data: PoolProps;
+  data: PoolCardProps;
 }
 
 export function PoolCard({ data, ...rest }: Props) {

@@ -1,68 +1,77 @@
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {PlusCircle, SoccerBall} from "phosphor-react-native"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { PlusCircle, SoccerBall } from "phosphor-react-native";
 import { useTheme } from "native-base";
 
-import {Platform} from "react-native";
-
+import { Platform } from "react-native";
 
 import { New } from "../screens/New";
 import { Pools } from "../screens/Pools";
-import {Find} from "../screens/Find";
+import { Find } from "../screens/Find";
+import { Details } from "../screens/Details";
 
-const {Navigator, Screen} = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 //rotas do app
-export function AppRoutes(){
-    //usando tema do Native Base
-    const {colors, sizes} = useTheme();
+export function AppRoutes() {
+  //usando tema do Native Base
+  const { colors, sizes } = useTheme();
 
-    const size = sizes[6];
+  const size = sizes[6];
 
-    return(
-        <Navigator screenOptions={{
-            headerShown: false,
-            tabBarLabelPosition: "beside-icon",
-            tabBarActiveTintColor: colors.yellow[500],
-            tabBarInactiveTintColor: colors.gray[300],
-            tabBarStyle:{
-                position: "absolute",
-                height: sizes[22],
-                borderTopWidth: 0,
-                backgroundColor: colors.gray[800]
-            },
-            tabBarItemStyle:{
-                //tab bar esta como absolute e seus items como relative para se posicao baseados nela
-                position: "relative",
-                top: Platform.OS === 'android' ? -10 : 0
+  return (
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarLabelPosition: "beside-icon",
+        tabBarActiveTintColor: colors.yellow[500],
+        tabBarInactiveTintColor: colors.gray[300],
+        tabBarStyle: {
+          position: "absolute",
+          height: sizes[22],
+          borderTopWidth: 0,
+          backgroundColor: colors.gray[800],
+        },
+        tabBarItemStyle: {
+          //tab bar esta como absolute e seus items como relative para se posicao baseados nela
+          position: "relative",
+          top: Platform.OS === "android" ? -10 : 0,
+        },
+      }}
+    >
+      <Screen
+        name="new"
+        component={New}
+        options={{
+          tabBarIcon: ({ color }) => <PlusCircle color={color} size={size} />,
+          tabBarLabel: "Novo bolão",
+        }}
+      />
+      <Screen
+        name="pools"
+        component={Pools}
+        options={{
+          tabBarIcon: ({ color }) => <SoccerBall color={color} size={size} />,
+          tabBarLabel: "Meus bolões",
+        }}
+      />
 
-            }
-        }}>
-            <Screen 
-                name="new"
-                component={New}
-                options={{
-                    tabBarIcon: ({color})=> <PlusCircle color={color} size={size} />,
-                    tabBarLabel: "Novo bolão",
-                    
-                }}
-            />
-            <Screen 
-                name="pools"
-                component={Pools}
-                options={{
-                    tabBarIcon: ({color})=> <SoccerBall color={color} size={size} />,
-                    tabBarLabel: "Meus bolões",
-                }}
-            />
+      <Screen
+        name="find"
+        component={Find}
+        options={{
+          //escondendo botao no tab bar
+          tabBarButton: () => null,
+        }}
+      />
 
-            <Screen 
-                name="find"
-                component={Find}
-                options={{
-                    //escondendo botao no tab bar
-                    tabBarButton: ()=> null 
-                }}
-            />
-        </Navigator>
-    )
+      <Screen
+        name="details"
+        component={Details}
+        options={{
+          //escondendo botao no tab bar
+          tabBarButton: () => null,
+        }}
+      />
+    </Navigator>
+  );
 }
